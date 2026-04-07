@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Syne', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #080b14;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0e1220;
+}
+::-webkit-scrollbar-thumb {
+  background: #4340d0;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6272f7;
+}
+
+/* Noise texture overlay */
+.noise-bg::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Glow effects */
+.glow-brand {
+  box-shadow: 0 0 40px rgba(98, 114, 247, 0.3), 0 0 80px rgba(98, 114, 247, 0.1);
+}
+
+.glow-accent {
+  box-shadow: 0 0 40px rgba(249, 115, 22, 0.3);
+}
+
+.text-glow {
+  text-shadow: 0 0 30px rgba(98, 114, 247, 0.5);
+}
+
+/* Grid pattern */
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(98, 114, 247, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(98, 114, 247, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #6272f7 0%, #a78bfa 50%, #fb923c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(135deg, #6272f7 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated border */
+.animated-border {
+  position: relative;
+  border-radius: 12px;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 13px;
+  padding: 1px;
+  background: linear-gradient(135deg, #6272f7, #a78bfa, #fb923c, #6272f7);
+  background-size: 300% 300%;
+  animation: borderRotate 4s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Shimmer effect */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  animation: shimmer 2.5s infinite;
+}
+@keyframes shimmer {
+  to { left: 140%; }
+}
+
+/* Button styles */
+.btn-primary {
+  @apply relative overflow-hidden px-8 py-3.5 rounded-xl font-semibold text-white transition-all duration-300;
+  background: linear-gradient(135deg, #4f52eb, #6272f7);
+  box-shadow: 0 4px 24px rgba(98, 114, 247, 0.4);
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 32px rgba(98, 114, 247, 0.6);
+  transform: translateY(-2px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  @apply relative px-8 py-3.5 rounded-xl font-semibold text-white transition-all duration-300;
+  border: 1px solid rgba(98, 114, 247, 0.5);
+  background: transparent;
+}
+.btn-outline:hover {
+  background: rgba(98, 114, 247, 0.1);
+  border-color: rgba(98, 114, 247, 0.8);
+  box-shadow: 0 0 20px rgba(98, 114, 247, 0.2);
+}
+
+/* Section padding */
+.section-pad {
+  @apply py-24 px-4 md:px-8 lg:px-16;
+}
+
+/* Badge */
+.badge {
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide;
+  background: rgba(98, 114, 247, 0.15);
+  border: 1px solid rgba(98, 114, 247, 0.3);
+  color: #a5bafd;
+}
+
+/* Input styles */
+.input-field {
+  @apply w-full px-4 py-3.5 rounded-xl text-white placeholder-slate-500 transition-all duration-300;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-body);
+}
+.input-field:focus {
+  outline: none;
+  border-color: rgba(98, 114, 247, 0.6);
+  background: rgba(98, 114, 247, 0.05);
+  box-shadow: 0 0 0 3px rgba(98, 114, 247, 0.1);
+}
+
+select.input-field option {
+  background: #141929;
+  color: #e2e8f0;
+}
